@@ -1,66 +1,10 @@
-import _ from "lodash";
-
-function GetSortOrder(prop: any) {    
-	return function(a: any, b: any) {    
-		if (a[prop] > b[prop]) {    
-			return 1;    
-		} else if (a[prop] < b[prop]) {    
-			return -1;    
-		}    
-		return 0;    
-	}    
-}  
-
-function sortByKey(jsObj: any){
-	var sortedArray = [];
-
-	// Push each JSON Object entry in array by [key, value]
-	for(var i in jsObj)
-	{
-		sortedArray.push([i, jsObj[i]]);
-	}
-
-  // Run native sort function and returns sorted array.
-	return sortedArray.sort();
-}
-
-/////////////////////
-
-const jsonToSortedArray:any = (json: any) => {
-    let ordered = [];
-    for (let i in json) {
-        let value;
-        if (json[i] instanceof Object) {
-            value = jsonToSortedArray(json[i]);
-        } else {
-            value = json[i];
-        }
-        ordered.push([i, value]);
-    }
-    return ordered.sort();
-}
-
-function arrayToStringJson(ordered: any) {
-    let result = '{'
-    for (let i = 0; i < ordered.length; i++) {
-        const key = '"' + ordered[i][0] + '"';
-        let value;
-        if (ordered[i][1] instanceof Array) {
-            value = ':' + arrayToStringJson(ordered[i][1]) + ',';
-        } else {
-            value = ':"' + ordered[i][1] + '",';
-        }
-        result += key + value;
-    }
-    result = result.substring(0, result.length - 1);
-    return result + '}';
-}
-
+import _, { findIndex } from "lodash";
 
 const sortScores = (data: any, count: number) => {
-	console.log(data, ": data inner");
-	console.log(count, ": count");
-
+	// console.log(data, ": data inner");
+	// console.log(count, ": count");
+	// json.parse(data) // go from original format to json
+	////////////////////////////////////////////////
 
 	// const sortedData = _.cloneDeep(data);
 	// const sortedData0 = data.sort();
@@ -78,13 +22,56 @@ const sortScores = (data: any, count: number) => {
 	// console.log(ordered, ": ordered");
 	// console.log(result, ": result");
 
-	const array:any = [];
+	// const array:any = [];
 
-	for (const key in data) {
-		array.push(data[key]);
-	}
+	// for (const key in data) {
+	// 	console.log(key, ": key");
+	// 	console.log(data[key], ": data[key]");
+	// 	array.push(data[key]);
+	// }
 
-	console.log(array, ": array");
+	// const array = Object.keys(data).map(key => data[key]["10622876"]);
+	// const array = Object.keys(data).map(key => data[key]);
+	// const array:any = [];
+
+	// for(const [key,value] of Object.entries(data)) {
+	// 	console.log(value, "testing");
+	// }
+
+	// const tmp2 = data.map((obj: any) => Number(Object.keys(obj))).sort();
+
+	let obj2: any = {}
+	const tmp2 = data.map((obj:any) =>{
+		// TODO try catch of a JSON parse Object[key]
+		// if error skip that one, move onto next one
+		const value: any = Object.values(obj)[0];
+		const key = Object.keys(obj)[0]
+		obj2[key] = value;
+		return Number(Object.keys(obj))
+	}).sort().map((key:any) => { return { "score": key, "id": obj2[key].id }}) 
+
+	console.log(tmp2, ": tmp2");
+	const args = process.argv.slice(2);
+
+	console.log(args, ": args");
+
+	// let test1 = data.forEach((item:any) => {
+	// 	console.log(item, ": item");
+	// 	var jsonObj = JSON.parse(item);
+	// 	console.log(jsonObj, ": jsonObj");
+	// 	// console.log(item[0], ": item.child");
+	// 	// console.log(findIndex(item), ": findIndex(item");
+	// 	array.push(findIndex(item));
+	// }) 
+
+
+
+	// console.log(array, ": array");
+
+	// for(let key in data) { array.push(data[key])}
+
+	// let test123 = array.find((x:any) => x.key === "10622876")
+	// console.log(test123, ": test123");
 
   	// sortedData.sort((a: any, b: any) => {
 

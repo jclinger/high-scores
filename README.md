@@ -65,3 +65,7 @@ Other requirements / things to note about the data files:
 ​
 ​
 Upon successful running, the program should exit with exit code 0, any other errors as described above should exit with a non 0 code.
+
+### How to run
+
+ts-node getHighScores.ts <./filepath> <number of records to sort> ./scores.json
