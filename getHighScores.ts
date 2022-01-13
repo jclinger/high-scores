@@ -1,7 +1,9 @@
-import * as data from "./scores.json";
+import data from "./scores.json";
 import { sortScores } from "./sortScores";
 
 console.log(data, ": this is another test script!!!");
-const result = sortScores(data);
+console.log(data.length, ": data length");
 
-console.log(result, ": result");
+const result = sortScores(data, data.length);
+
+console.log(result, ": Sorted Scores result");
