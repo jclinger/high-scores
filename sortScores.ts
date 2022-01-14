@@ -24,7 +24,8 @@ const sortScores = (data: any, qtySorted: number) => {
 			// console.log(Object.keys(obj), ": Object.keys(obj)");
 			return Number(Object.keys(obj))
 		} catch {
-			console.log(obj, ": obj rejected");
+			console.error("ERROR: invalid json format No JSON object could be decoded - THIS IS NOT JSON")
+			// console.log(obj, ": obj rejected");
 			// move on to next iteration
 		}
 	}).sort() //.map((key:any) => { return { "score": key, "id": obj2[key].id }}) 
