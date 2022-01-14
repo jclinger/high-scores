@@ -4,13 +4,19 @@ const userarguments = process.argv.slice(2);
 const filepath = userarguments[0];
 const quantity = userarguments[1];
 
-// TODO validate that there is an actual argument
 const filedata = fs.readFileSync(filepath);
-const qtySorted = parseInt(quantity);
-const data = JSON.parse(filedata.toString());
-console.log(data, ": filedata");
-console.log(qtySorted, ": qtySorted");
+const qtyToSort = parseInt(quantity);
 
-const result = sortScores(data, qtySorted);
+const tempArray = filedata.toString().split("},");
 
-console.log(result);
+// cleans up data, removes "[\r\n etc."
+const updatedArray = tempArray.map(e => {
+  return "{" + e.split(/{(.+)/)[1] + "}"
+})
+
+// only sort based on N items
+const nData = updatedArray.slice(0, qtyToSort);
+// sorts based on the high scores
+const result = sortScores(nData);
+
+if(result) { console.log(result)};

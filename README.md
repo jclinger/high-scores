@@ -68,4 +68,6 @@ Upon successful running, the program should exit with exit code 0, any other err
 
 ### How to run
 
-ts-node getHighScores.ts <./filepath> <number of records to sort> ./scores.json
+copy and paste this into the terminal, replacing the fields <parameters>:
+
+ts-node getHighScores.ts <./filepath> <number of records to sort>
