@@ -1,4 +1,3 @@
-// import data from "./scores.json";
 import { sortScores } from "./sortScores";
 import fs from "fs";
 const userarguments = process.argv.slice(2);
@@ -14,4 +13,4 @@ console.log(qtySorted, ": qtySorted");
 
 const result = sortScores(data, qtySorted);
 
-console.log(result, ": Sorted Scores result");
+console.log(result);
